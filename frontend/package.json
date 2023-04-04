@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "generate:api": "openapi-generator generate -g typescript-angular -i ./openapi-test/roshambr.yml -o ./openapi-test/build",
-    "generate:api2": "ng-openapi-gen --input openapi-test/roshambr.yml --output openapi-test/build",
+    "generate:api": "ng-openapi-gen --input https://raw.githubusercontent.com/tenlions/cc23-apr/master/backend/src/main/resources/spec/roshambr.yml --output openapi-test/build",
     "prestart": "npm run generate:api",
     "start": "ng serve",
     "prebuild": "npm run generate:api",
