@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-import {faHandScissors as faScissors, faHandRock as faRock, faHandPaper as faPaper, IconDefinition, faQuestion as faQuestion} from '@fortawesome/free-solid-svg-icons';
+import {faHandScissors as faScissors, faHandRock as faRock, faHandPaper as faPaper, faQuestion as faQuestion, IconDefinition} from '@fortawesome/free-solid-svg-icons';
 
 import { GameResultService } from '../../openapi-test/build/services/game-result.service';
 import { GameResult } from '../../openapi-test/build/models/game-result';
@@ -33,6 +33,10 @@ export class GameComponent implements OnInit {
 
     playerIcon = faQuestion;
     apiIcon = faQuestion;
+
+    faRock = faRock;
+    faPaper = faPaper;
+    faScissors = faScissors;
 
     constructor(private http: HttpClient, private gameResultService: GameResultService) { }
 

@@ -7,13 +7,13 @@
   
   <div class="choices">
     <button class="choice" [class.selected]="playerChoice === PlayerChoice.Rock" (click)="playGame(PlayerChoice.Rock)">
-      <fa-icon icon="hand-rock"></fa-icon>
+      <fa-icon [icon]=faRock></fa-icon>
     </button>
     <button class="choice" [class.selected]="playerChoice === PlayerChoice.Paper" (click)="playGame(PlayerChoice.Paper)">
-      <fa-icon icon="hand-paper"></fa-icon>
+      <fa-icon [icon]=faPaper></fa-icon>
     </button>
     <button class="choice" [class.selected]="playerChoice === PlayerChoice.Scissors" (click)="playGame(PlayerChoice.Scissors)">
-      <fa-icon icon="hand-scissors"></fa-icon>
+      <fa-icon [icon]=faScissors></fa-icon>
     </button>
   </div>
 
