@@ -38,8 +38,16 @@ components:
     GameResult:
       type: object
       required:
+        - player1Choice
+        - player2Choice
         - result
       properties:
+        player1Choice:
+          type: string
+          description: The first player's choice of rock, paper or scissors
+        player2Choice:
+          type: string
+          description: The second player's choice of rock, paper or scissors
         result:
           type: string
           description: The result of the most recent match

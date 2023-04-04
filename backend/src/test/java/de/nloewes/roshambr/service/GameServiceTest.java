@@ -1,7 +1,7 @@
 package de.nloewes.roshambr.service;
 
 import de.nloewes.roshambr.model.GameChoice;
-import de.nloewes.roshambr.model.GameResult;
+import de.nloewes.roshambr.model.MatchResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +16,10 @@ public class GameServiceTest {
         GameChoice player2Choice = GameChoice.ROCK;
 
         // WHEN
-        GameResult result = gameService.calculateResult(player1Choice, player2Choice);
+        MatchResult result = gameService.calculateResult(player1Choice, player2Choice);
 
         // THEN
-        Assertions.assertEquals(GameResult.DRAW, result);
+        Assertions.assertEquals(MatchResult.DRAW, result);
     }
 
     @Test
@@ -29,10 +29,10 @@ public class GameServiceTest {
         GameChoice player2Choice = GameChoice.PAPER;
 
         // WHEN
-        GameResult result = gameService.calculateResult(player1Choice, player2Choice);
+        MatchResult result = gameService.calculateResult(player1Choice, player2Choice);
 
         // THEN
-        Assertions.assertEquals(GameResult.DRAW, result);
+        Assertions.assertEquals(MatchResult.DRAW, result);
     }
 
     @Test
@@ -42,10 +42,10 @@ public class GameServiceTest {
         GameChoice player2Choice = GameChoice.SCISSORS;
 
         // WHEN
-        GameResult result = gameService.calculateResult(player1Choice, player2Choice);
+        MatchResult result = gameService.calculateResult(player1Choice, player2Choice);
 
         // THEN
-        Assertions.assertEquals(GameResult.DRAW, result);
+        Assertions.assertEquals(MatchResult.DRAW, result);
     }
 
     @Test
@@ -55,10 +55,10 @@ public class GameServiceTest {
         GameChoice player2Choice = GameChoice.SCISSORS;
 
         // WHEN
-        GameResult result = gameService.calculateResult(player1Choice, player2Choice);
+        MatchResult result = gameService.calculateResult(player1Choice, player2Choice);
 
         // THEN
-        Assertions.assertEquals(GameResult.PLAYER_1_WIN, result);
+        Assertions.assertEquals(MatchResult.PLAYER_1_WIN, result);
     }
 
     @Test
@@ -68,10 +68,10 @@ public class GameServiceTest {
         GameChoice player2Choice = GameChoice.ROCK;
 
         // WHEN
-        GameResult result = gameService.calculateResult(player1Choice, player2Choice);
+        MatchResult result = gameService.calculateResult(player1Choice, player2Choice);
 
         // THEN
-        Assertions.assertEquals(GameResult.PLAYER_1_WIN, result);
+        Assertions.assertEquals(MatchResult.PLAYER_1_WIN, result);
     }
 
     @Test
@@ -81,10 +81,10 @@ public class GameServiceTest {
         GameChoice player2Choice = GameChoice.PAPER;
 
         // WHEN
-        GameResult result = gameService.calculateResult(player1Choice, player2Choice);
+        MatchResult result = gameService.calculateResult(player1Choice, player2Choice);
 
         // THEN
-        Assertions.assertEquals(GameResult.PLAYER_1_WIN, result);
+        Assertions.assertEquals(MatchResult.PLAYER_1_WIN, result);
     }
 
     @Test
