@@ -1,12 +1,12 @@
 <div class="game">
   <div class="choices">
-    <button class="choice" [class.selected]="playerChoice === GameChoice.ROCK" (click)="playGame(GameChoice.ROCK)">
+    <button class="choice" [class.selected]="playerChoice === PlayerChoice.Rock" (click)="playGame(PlayerChoice.Rock)">
       <fa-icon icon="hand-rock"></fa-icon>
     </button>
-    <button class="choice" [class.selected]="playerChoice === GameChoice.PAPER" (click)="playGame(GameChoice.PAPER)">
+    <button class="choice" [class.selected]="playerChoice === PlayerChoice.Paper" (click)="playGame(PlayerChoice.Paper)">
       <fa-icon icon="hand-paper"></fa-icon>
     </button>
-    <button class="choice" [class.selected]="playerChoice === GameChoice.SCISSORS" (click)="playGame(GameChoice.SCISSORS)">
+    <button class="choice" [class.selected]="playerChoice === PlayerChoice.Scissors" (click)="playGame(PlayerChoice.Scissors)">
       <fa-icon icon="hand-scissors"></fa-icon>
     </button>
   </div>

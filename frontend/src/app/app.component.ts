@@ -1,26 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import {faHandScissors as faScissors, IconDefinition} from '@fortawesome/free-solid-svg-icons';
 
 import { GameResultService } from '../../openapi-test/build/services/game-result.service';
-
-enum GameChoice {
-    ROCK = 'ROCK',
-    PAPER = 'PAPER',
-    SCISSORS = 'SCISSORS'
-}
-
-interface GameResult {
-    result: string;
-}
-
-interface ApiGameResult {
-    playerChoice: GameChoice;
-    apiChoice: GameChoice;
-    result: string;
-}
+import { GameResult } from '../../openapi-test/build/models/game-result';
+import { PlayerChoice } from 'openapi-test/build/models';
+import { MatchResult } from 'openapi-test/build/models';
+import { PlayerTurn } from 'openapi-test/build/models';
 
 @Component({
     selector: 'app-game',
@@ -28,12 +15,12 @@ interface ApiGameResult {
     styleUrls: ['./app.component.css']
 })
 export class GameComponent implements OnInit {
-    GameChoice = GameChoice;
+    PlayerChoice = PlayerChoice;
 
-    playerChoice: GameChoice | undefined;
-    computerChoice: GameChoice | undefined;
-    result: string | undefined;
-    apiResult: ApiGameResult | undefined;
+    playerChoice: PlayerChoice | undefined;
+    computerChoice: PlayerChoice | undefined;
+    result: MatchResult | undefined;
+    aiResult: GameResult | undefined;
     isLoading = false;
 
     constructor(private http: HttpClient, private gameResultService: GameResultService) { }
@@ -41,7 +28,7 @@ export class GameComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    playGame(playerChoice: GameChoice): void {
+    playGame(playerChoice: PlayerChoice): void {
         this.isLoading = true;
         this.playerChoice = playerChoice;
 
@@ -58,23 +45,28 @@ export class GameComponent implements OnInit {
             this.isLoading = false;
         }); */
 
-        this.computerChoice = this.getRandomChoice();
+        this.playApi(playerChoice).subscribe((response: GameResult) => {
+            this.result = response.result;
+            this.computerChoice = response.player2Choice;
+
+            console.log(this.result);
+            console.log(this.computerChoice);
+
+            this.isLoading = false;
+        });
+
+        /* this.computerChoice = this.getRandomChoice();
         this.result = playerChoice + " | " + this.computerChoice;
         console.log(this.result); 
-        this.isLoading = false;
+        this.isLoading = false; */
     }
 
-    private getRandomChoice(): GameChoice {
-        const choices = [GameChoice.ROCK, GameChoice.PAPER, GameChoice.SCISSORS];
-        const index = Math.floor(Math.random() * 3);
-        return choices[index];
+    private playApi(choice: PlayerChoice) {
+        var turn: PlayerTurn = {playerChoice: choice}
+        return this.gameResultService.postMatch({body: turn});
     }
 
-    private playPost(playerChoice: GameChoice) {
-        return this.http.post<ApiGameResult>('/api/play', playerChoice);
-    }
-
-    private getIcon(choice: GameChoice): IconDefinition {
+    private getIcon(choice: PlayerChoice): IconDefinition {
         return faScissors;
     }
 }

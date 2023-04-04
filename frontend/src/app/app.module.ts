@@ -20,7 +20,7 @@ import { ApiModule } from '../../openapi-test/build/api.module';
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
-    ApiModule
+    ApiModule.forRoot({rootUrl: 'http://localhost:8080'})
   ],
   providers: [],
   bootstrap: [GameComponent]
