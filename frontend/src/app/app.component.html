@@ -1,4 +1,10 @@
 <div class="game">
+  <div class="scoreboard">
+    <div class="badge" id="user-label">YOU</div>
+    <div class="badge" id="api-label">API</div>
+    <span id="user-score">{{playerScore}}</span>:<span id="api-score">{{apiScore}}</span>
+  </div>
+  
   <div class="choices">
     <button class="choice" [class.selected]="playerChoice === PlayerChoice.Rock" (click)="playGame(PlayerChoice.Rock)">
       <fa-icon icon="hand-rock"></fa-icon>
@@ -10,13 +16,14 @@
       <fa-icon icon="hand-scissors"></fa-icon>
     </button>
   </div>
-  <div class="result" *ngIf="result !== undefined">
-    <p *ngIf="isLoading">Loading...</p>
-    <p *ngIf="!isLoading">{{ result }}</p>
+
+  <div class="result">
     <p class="choices">
-      <i class="fa-solid fa-hand-{{ playerChoice?.toLowerCase() }}"></i>
+      <fa-icon [icon]=playerIcon></fa-icon>
       <span>vs</span>
-      <i class="fa-solid fa-hand-{{ computerChoice?.toLowerCase() }}"></i>
+      <fa-icon [icon]=apiIcon></fa-icon>
     </p>
+    <p *ngIf="isLoading">Loading...</p>
+    <p *ngIf="!isLoading">{{ turnResult }}</p>
   </div>
 </div>
