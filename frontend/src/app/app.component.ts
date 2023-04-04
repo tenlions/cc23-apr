@@ -15,6 +15,8 @@ import { PlayerTurn } from 'openapi-test/build/models';
     styleUrls: ['./app.component.css']
 })
 export class GameComponent implements OnInit {
+    title = 'RoshambrFrontend';
+
     PlayerChoice = PlayerChoice;
 
     playerChoice: PlayerChoice | undefined;
