@@ -1,0 +1,66 @@
+openapi: 3.0.0
+info:
+  title: Roshambr
+  description: A simple demo application, offering a basic API to play rock-paper-scissors against a CPU opponent
+  version: 0.0.1
+
+paths:
+  /play/cpu:
+    post:
+      summary: Play a match of rock, paper, scissors against the CPU
+      operationId: postMatch
+      tags:
+        - gameResult
+      requestBody:
+        required: true
+        description: The choice made by the player
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameChoice'
+      responses:
+        '200':
+          description: The result of the match
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameResult'
+components:
+  schemas:
+    GameChoice:
+      type: object
+      required:
+        - playerChoice
+      properties:
+        playerChoice:
+          type: string
+          description: The player's choice of rock, paper or scissors
+    GameResult:
+      type: object
+      required:
+        - result
+      properties:
+        result:
+          type: string
+          description: The result of the most recent match
+    Exception:
+      type: object
+      required:
+        - httpStatus
+        - code
+        - message
+      properties:
+        httpStatus:
+          type: integer
+          format: integer32
+          description: The http status associated with the exception
+        code:
+          type: integer
+          format: integer32
+          description: Roshambr's error code for the specific error that occurred
+        message:
+          type: string
+          description: The error message associated with the error that occurred
+        value:
+          type: string
+          description: The given value that caused the error, if any

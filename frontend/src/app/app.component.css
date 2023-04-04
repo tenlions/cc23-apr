@@ -1,0 +1,63 @@
+.game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-size: 2em;
+  }
+  
+  .choices {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2em;
+  }
+  
+  .choice {
+    background-color: white;
+    border: none;
+    border-radius: 25%;
+    margin: 0 1em;
+    padding: 2em;
+    box-shadow: 0px 0px 5px grey;
+    transition: box-shadow 0.2s;
+  }
+  
+  .choice fa-icon {
+    font-size: 3em;
+    color: grey;
+  }
+
+  .choice:hover {
+    box-shadow: 0px 0px 10px grey;
+    cursor: pointer;
+  }
+  
+  .choice.selected {
+    background-color: #cce5ff;
+    box-shadow: 0px 0px 5px #99cceb;
+  }
+  
+  .result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5em;
+  }
+  
+  .result p.choices {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+  }
+  
+  .result p.choices i {
+    font-size: 3em;
+    margin: 0 1em;
+  }
+  
+  .result p.choices span {
+    font-size: 2em;
+    margin: 0 1em;
+  }
+  

@@ -1,0 +1,22 @@
+<div class="game">
+  <div class="choices">
+    <button class="choice" [class.selected]="playerChoice === GameChoice.ROCK" (click)="playGame(GameChoice.ROCK)">
+      <fa-icon icon="hand-rock"></fa-icon>
+    </button>
+    <button class="choice" [class.selected]="playerChoice === GameChoice.PAPER" (click)="playGame(GameChoice.PAPER)">
+      <fa-icon icon="hand-paper"></fa-icon>
+    </button>
+    <button class="choice" [class.selected]="playerChoice === GameChoice.SCISSORS" (click)="playGame(GameChoice.SCISSORS)">
+      <fa-icon icon="hand-scissors"></fa-icon>
+    </button>
+  </div>
+  <div class="result" *ngIf="result !== undefined">
+    <p *ngIf="isLoading">Loading...</p>
+    <p *ngIf="!isLoading">{{ result }}</p>
+    <p class="choices">
+      <i class="fa-solid fa-hand-{{ playerChoice?.toLowerCase() }}"></i>
+      <span>vs</span>
+      <i class="fa-solid fa-hand-{{ computerChoice?.toLowerCase() }}"></i>
+    </p>
+  </div>
+</div>
