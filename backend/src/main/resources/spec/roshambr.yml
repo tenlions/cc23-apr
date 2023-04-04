@@ -17,7 +17,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GameChoice'
+              $ref: '#/components/schemas/PlayerTurn'
       responses:
         '200':
           description: The result of the match
@@ -27,7 +27,7 @@ paths:
                 $ref: '#/components/schemas/GameResult'
 components:
   schemas:
-    GameChoice:
+    PlayerTurn:
       type: object
       required:
         - playerChoice
@@ -43,14 +43,26 @@ components:
         - result
       properties:
         player1Choice:
-          type: string
+          $ref: '#/components/schemas/PlayerChoice'
           description: The first player's choice of rock, paper or scissors
         player2Choice:
-          type: string
+          $ref: '#/components/schemas/PlayerChoice'
           description: The second player's choice of rock, paper or scissors
         result:
-          type: string
+          $ref: '#/components/schemas/MatchResult'
           description: The result of the most recent match
+    PlayerChoice:
+      type: string
+      enum:
+        - ROCK
+        - PAPER
+        - SCISSORS
+    MatchResult:
+      type: string
+      enum:
+        - PLAYER_1_WIN
+        - PLAYER_2_WIN
+        - DRAW
     Exception:
       type: object
       required:

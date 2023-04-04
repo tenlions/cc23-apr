@@ -1,6 +1,6 @@
 package de.nloewes.roshambr.service;
 
-import de.nloewes.roshambr.model.GameChoice;
+import de.nloewes.roshambr.model.PlayerChoice;
 import de.nloewes.roshambr.model.GameResult;
 import de.nloewes.roshambr.model.MatchResult;
 import io.micrometer.core.annotation.Timed;
@@ -19,7 +19,7 @@ public class GameService {
     private static final Logger LOG = LoggerFactory.getLogger(GameService.class);
 
     /**
-     * Plays a game of rock, paper, scissors based on a given {@link GameChoice} and returns the match result.
+     * Plays a game of rock, paper, scissors based on a given {@link PlayerChoice} and returns the match result.
      * The CPU opponent's turn is chosen randomly.
      * <p>
      * After choosing the opponent's turn, the result is calculated abiding the following rules:
@@ -29,14 +29,14 @@ public class GameService {
      * <p>
      * Identical choices result in a draw.
      *
-     * @param playerChoice the given {@link GameChoice} as input by the player
+     * @param playerChoice the given {@link PlayerChoice} as input by the player
      * @return the {@link MatchResult} of the match
      */
     @Timed(value = "cpuMatch.time", description = "Time taken to play a match against the CPU")
-    public GameResult playCpuMatch(GameChoice playerChoice) {
+    public GameResult playCpuMatch(PlayerChoice playerChoice) {
         LOG.info("Starting new match against CPU. Player choice: {}", playerChoice);
 
-        GameChoice cpuChoice = getCpuChoice();
+        PlayerChoice cpuChoice = getCpuChoice();
         LOG.info("CPU choice: {}", cpuChoice);
 
         MatchResult matchResult = calculateResult(playerChoice, cpuChoice);
@@ -64,19 +64,19 @@ public class GameService {
      * @return the {@link MatchResult} of the match
      */
     @Timed(value = "calcResult.time", description = "Time taken to calculate the outcome of a match based on 2 choices")
-    protected MatchResult calculateResult(GameChoice player1Choice, GameChoice player2Choice) {
+    protected MatchResult calculateResult(PlayerChoice player1Choice, PlayerChoice player2Choice) {
         switch (player1Choice) {
             case ROCK:
-                if (GameChoice.ROCK.equals(player2Choice)) return MatchResult.DRAW;
-                if (GameChoice.SCISSORS.equals(player2Choice)) return MatchResult.PLAYER_1_WIN;
+                if (PlayerChoice.ROCK.equals(player2Choice)) return MatchResult.DRAW;
+                if (PlayerChoice.SCISSORS.equals(player2Choice)) return MatchResult.PLAYER_1_WIN;
                 break;
             case PAPER:
-                if (GameChoice.PAPER.equals(player2Choice)) return MatchResult.DRAW;
-                if (GameChoice.ROCK.equals(player2Choice)) return MatchResult.PLAYER_1_WIN;
+                if (PlayerChoice.PAPER.equals(player2Choice)) return MatchResult.DRAW;
+                if (PlayerChoice.ROCK.equals(player2Choice)) return MatchResult.PLAYER_1_WIN;
                 break;
             case SCISSORS:
-                if (GameChoice.SCISSORS.equals(player2Choice)) return MatchResult.DRAW;
-                if (GameChoice.PAPER.equals(player2Choice)) return MatchResult.PLAYER_1_WIN;
+                if (PlayerChoice.SCISSORS.equals(player2Choice)) return MatchResult.DRAW;
+                if (PlayerChoice.PAPER.equals(player2Choice)) return MatchResult.PLAYER_1_WIN;
                 break;
         }
 
@@ -84,11 +84,11 @@ public class GameService {
     }
 
     /**
-     * Returns a single, randomly chosen {@link GameChoice} for the CPU player
+     * Returns a single, randomly chosen {@link PlayerChoice} for the CPU player
      *
-     * @return a random {@link GameChoice}
+     * @return a random {@link PlayerChoice}
      */
-    private GameChoice getCpuChoice() {
-        return GameChoice.getRandomChoice();
+    private PlayerChoice getCpuChoice() {
+        return PlayerChoice.getRandomChoice();
     }
 }

@@ -1,6 +1,6 @@
 package de.nloewes.roshambr.api;
 
-import de.nloewes.roshambr.model.dto.GameChoice;
+import de.nloewes.roshambr.model.dto.PlayerTurn;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -33,20 +33,20 @@ public class PlayApiTest {
 
     @Test
     public void testPost_isSuccessful() throws Exception {
-        GameChoice choice = new GameChoice();
-        choice.setPlayerChoice("ROCK");
+        PlayerTurn turn = new PlayerTurn();
+        turn.setPlayerChoice("ROCK");
         ObjectMapper objectMapper = new ObjectMapper();
-        String requestJson = objectMapper.writeValueAsString(choice);
+        String requestJson = objectMapper.writeValueAsString(turn);
         mockMvc.perform(post(PLAY_CPU_PATH).contentType(MediaType.APPLICATION_JSON).content(requestJson))
                 .andExpect(status().is2xxSuccessful());
     }
 
     @Test
     public void testPost_Invalid() throws Exception {
-        GameChoice choice = new GameChoice();
-        choice.setPlayerChoice("INVALID");
+        PlayerTurn turn = new PlayerTurn();
+        turn.setPlayerChoice("INVALID");
         ObjectMapper objectMapper = new ObjectMapper();
-        String requestJson = objectMapper.writeValueAsString(choice);
+        String requestJson = objectMapper.writeValueAsString(turn);
         mockMvc.perform(post(PLAY_CPU_PATH).contentType(MediaType.APPLICATION_JSON).content(requestJson))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.httpStatus").value("400"))
@@ -57,9 +57,9 @@ public class PlayApiTest {
 
     @Test
     public void testPost_delegate_isSuccessful() {
-        GameChoice choice = new GameChoice();
-        choice.setPlayerChoice("ROCK");
-        playApi.postMatch(choice);
+        PlayerTurn turn = new PlayerTurn();
+        turn.setPlayerChoice("ROCK");
+        playApi.postMatch(turn);
     }
 
 

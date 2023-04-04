@@ -7,13 +7,13 @@ package de.nloewes.roshambr.model;
  */
 public class GameResult {
 
-    private GameChoice player1Choice;
+    private PlayerChoice player1Choice;
 
-    private GameChoice player2Choice;
+    private PlayerChoice player2Choice;
 
     private MatchResult result;
 
-    public GameResult(GameChoice player1Choice, GameChoice player2Choice, MatchResult result) {
+    public GameResult(PlayerChoice player1Choice, PlayerChoice player2Choice, MatchResult result) {
         this.player1Choice = player1Choice;
         this.player2Choice = player2Choice;
         this.result = result;
@@ -22,19 +22,19 @@ public class GameResult {
     public GameResult() {
     }
 
-    public GameChoice getPlayer1Choice() {
+    public PlayerChoice getPlayer1Choice() {
         return player1Choice;
     }
 
-    public void setPlayer1Choice(GameChoice player1Choice) {
+    public void setPlayer1Choice(PlayerChoice player1Choice) {
         this.player1Choice = player1Choice;
     }
 
-    public GameChoice getPlayer2Choice() {
+    public PlayerChoice getPlayer2Choice() {
         return player2Choice;
     }
 
-    public void setPlayer2Choice(GameChoice player2Choice) {
+    public void setPlayer2Choice(PlayerChoice player2Choice) {
         this.player2Choice = player2Choice;
     }
 

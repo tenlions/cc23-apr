@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-public class GameChoiceTest {
+public class PlayerChoiceTest {
 
     @Test
     public void testFromString_valid_lowerCase() {
@@ -13,10 +13,10 @@ public class GameChoiceTest {
         String input = "rock";
 
         // WHEN
-        GameChoice choice = GameChoice.fromString(input);
+        PlayerChoice choice = PlayerChoice.fromString(input);
 
         // THEN
-        assertEquals(GameChoice.ROCK, choice);
+        assertEquals(PlayerChoice.ROCK, choice);
     }
 
     @Test
@@ -25,10 +25,10 @@ public class GameChoiceTest {
         String input = "ROCK";
 
         // WHEN
-        GameChoice choice = GameChoice.fromString(input);
+        PlayerChoice choice = PlayerChoice.fromString(input);
 
         // THEN
-        assertEquals(GameChoice.ROCK, choice);
+        assertEquals(PlayerChoice.ROCK, choice);
     }
 
     @Test
@@ -37,10 +37,10 @@ public class GameChoiceTest {
         String input = "rOcK";
 
         // WHEN
-        GameChoice choice = GameChoice.fromString(input);
+        PlayerChoice choice = PlayerChoice.fromString(input);
 
         // THEN
-        assertEquals(GameChoice.ROCK, choice);
+        assertEquals(PlayerChoice.ROCK, choice);
     }
 
     @Test
@@ -49,10 +49,10 @@ public class GameChoiceTest {
         String input = "rOcK ";
 
         // WHEN
-        GameChoice choice = GameChoice.fromString(input);
+        PlayerChoice choice = PlayerChoice.fromString(input);
 
         // THEN
-        assertEquals(GameChoice.ROCK, choice);
+        assertEquals(PlayerChoice.ROCK, choice);
     }
 
     @Test
@@ -61,6 +61,6 @@ public class GameChoiceTest {
         String input = "foo";
 
         //WHEN
-        assertThrowsExactly(IllegalArgumentException.class, () -> GameChoice.fromString(input));
+        assertThrowsExactly(IllegalArgumentException.class, () -> PlayerChoice.fromString(input));
     }
 }

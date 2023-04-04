@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Enum to represent the possible turn choices available to either player of a game of rock, paper, scissors
  */
-public enum GameChoice {
+public enum PlayerChoice {
     ROCK,
     PAPER,
     SCISSORS;
@@ -16,9 +16,9 @@ public enum GameChoice {
      * Returns a random entry of this enum
      * @return a random entry of this enum
      */
-    public static GameChoice getRandomChoice() {
-        int index = random.nextInt(GameChoice.class.getEnumConstants().length);
-        return GameChoice.class.getEnumConstants()[index];
+    public static PlayerChoice getRandomChoice() {
+        int index = random.nextInt(PlayerChoice.class.getEnumConstants().length);
+        return PlayerChoice.class.getEnumConstants()[index];
     }
 
     /**
@@ -28,7 +28,7 @@ public enum GameChoice {
      *
      * @throws IllegalArgumentException if an invalid value was passed
      */
-    public static GameChoice fromString(String choice) throws IllegalArgumentException {
+    public static PlayerChoice fromString(String choice) throws IllegalArgumentException {
         return valueOf(choice.replaceAll(" ", "").toUpperCase());
     }
 }
