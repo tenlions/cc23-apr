@@ -25,6 +25,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GameResult'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
 components:
   schemas:
     PlayerTurn:
