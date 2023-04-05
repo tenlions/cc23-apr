@@ -1,11 +1,12 @@
 package de.nloewes.roshambr.service;
 
 import de.nloewes.roshambr.model.PlayerChoice;
-import de.nloewes.roshambr.model.GameResult;
 import de.nloewes.roshambr.model.MatchResult;
+import de.nloewes.roshambr.model.dao.Match;
 import io.micrometer.core.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,6 +16,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class GameService {
+
+    private MatchService matchService;
+
+    @Autowired
+    public void setMatchService(MatchService matchService) {
+        this.matchService = matchService;
+    }
 
     private static final Logger LOG = LoggerFactory.getLogger(GameService.class);
 
@@ -33,7 +41,7 @@ public class GameService {
      * @return the {@link MatchResult} of the match
      */
     @Timed(value = "cpuMatch.time", description = "Time taken to play a match against the CPU")
-    public GameResult playCpuMatch(PlayerChoice playerChoice) {
+    public Match playCpuMatch(PlayerChoice playerChoice) {
         LOG.info("Starting new match against CPU. Player choice: {}", playerChoice);
 
         PlayerChoice cpuChoice = getCpuChoice();
@@ -42,12 +50,7 @@ public class GameService {
         MatchResult matchResult = calculateResult(playerChoice, cpuChoice);
         LOG.info("Game result: {} ({} x {})", matchResult, playerChoice, cpuChoice);
 
-        GameResult gameResult = new GameResult();
-        gameResult.setPlayer1Choice(playerChoice);
-        gameResult.setPlayer2Choice(cpuChoice);
-        gameResult.setResult(matchResult);
-
-        return gameResult;
+        return matchService.save(playerChoice, cpuChoice, matchResult);
     }
 
     /**

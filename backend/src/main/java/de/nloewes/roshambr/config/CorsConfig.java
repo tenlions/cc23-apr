@@ -7,6 +7,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Allow-all cors configuration for demo purposes
+ *
+ * @author nloewes
  */
 @Configuration
 @EnableWebMvc

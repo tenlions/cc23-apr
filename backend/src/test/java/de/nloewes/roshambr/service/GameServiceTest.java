@@ -3,11 +3,27 @@ package de.nloewes.roshambr.service;
 import de.nloewes.roshambr.model.PlayerChoice;
 import de.nloewes.roshambr.model.MatchResult;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class GameServiceTest {
 
-    private final GameService gameService = new GameService();
+    @InjectMocks
+    private GameService gameService = new GameService();
+
+    @Mock
+    private MatchService matchService;
+
+    @BeforeAll
+    public void init() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     public void testCalculateResult_draw_rock() {
@@ -118,5 +134,17 @@ public class GameServiceTest {
         gameService.playCpuMatch(player1Choice);
 
         // THEN
+    }
+
+    @Test
+    public void testPlayCpuMatch_invokesService() {
+        // GIVEN
+        PlayerChoice player1Choice = PlayerChoice.ROCK;
+
+        // WHEN
+        gameService.playCpuMatch(player1Choice);
+
+        // THEN
+        Mockito.verify(matchService, Mockito.times(1)).save(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.any());
     }
 }

@@ -2,6 +2,7 @@ package de.nloewes.roshambr.api;
 
 import de.nloewes.roshambr.converter.PlayerTurnConverter;
 import de.nloewes.roshambr.converter.GameResultConverter;
+import de.nloewes.roshambr.model.dao.Match;
 import de.nloewes.roshambr.model.dto.GameResult;
 import de.nloewes.roshambr.model.dto.PlayerTurn;
 import de.nloewes.roshambr.service.GameService;
@@ -27,9 +28,9 @@ public class PlayApiImpl implements PlayApiDelegate {
     public ResponseEntity<GameResult> postMatch(PlayerTurn playerTurn) {
         de.nloewes.roshambr.model.PlayerChoice remoteChoice = PlayerTurnConverter.toSource(playerTurn);
 
-        de.nloewes.roshambr.model.GameResult result = gameService.playCpuMatch(remoteChoice);
+        Match match = gameService.playCpuMatch(remoteChoice);
 
-        GameResult resultDto = GameResultConverter.toTarget(result);
+        GameResult resultDto = GameResultConverter.toTarget(match);
 
         return new ResponseEntity<>(resultDto, HttpStatusCode.valueOf(200));
     }
