@@ -2,7 +2,10 @@ global:
   scrape_interval: 1m
 
 scrape_configs:
-  - job_name: "prometheus"
-    scrape_interval: 1m
+  - job_name: 'Roshambr Input'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 2s
     static_configs:
-      - targets: ["localhost:9090"]
+      - targets: ['roshambr:8080']
+        labels:
+          application: 'Roshambr'
