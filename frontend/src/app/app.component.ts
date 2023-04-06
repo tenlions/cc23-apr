@@ -29,7 +29,7 @@ export class GameComponent implements OnInit {
 
     playerScore = 0;
     apiScore = 0;
-    turnResult: string | undefined;
+    turnResult: string = "Take your pick";
 
     playerIcon = faQuestion;
     apiIcon = faQuestion;

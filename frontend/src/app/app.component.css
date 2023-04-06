@@ -44,16 +44,16 @@
     align-items: center;
     font-size: 1.5em;
   }
+
+  .result fa-icon {
+    font-size: 3em;
+    color: grey;
+  }
   
   .result p.choices {
     display: flex;
     justify-content: center;
     margin-top: 1em;
-  }
-  
-  .result p.choices i {
-    font-size: 3em;
-    margin: 0 1em;
   }
   
   .result p.choices span {

@@ -7,21 +7,19 @@
   
   <div class="choices">
     <button class="choice" [class.selected]="playerChoice === PlayerChoice.Rock" (click)="playGame(PlayerChoice.Rock)">
-      <fa-icon [icon]=faRock></fa-icon>
+      <fa-icon [icon]=faRock [fixedWidth]="true"></fa-icon>
     </button>
     <button class="choice" [class.selected]="playerChoice === PlayerChoice.Paper" (click)="playGame(PlayerChoice.Paper)">
-      <fa-icon [icon]=faPaper></fa-icon>
+      <fa-icon [icon]=faPaper [fixedWidth]="true"></fa-icon>
     </button>
     <button class="choice" [class.selected]="playerChoice === PlayerChoice.Scissors" (click)="playGame(PlayerChoice.Scissors)">
-      <fa-icon [icon]=faScissors></fa-icon>
+      <fa-icon [icon]=faScissors [fixedWidth]="true"></fa-icon>
     </button>
   </div>
 
   <div class="result">
     <p class="choices">
-      <fa-icon [icon]=playerIcon></fa-icon>
-      <span>vs</span>
-      <fa-icon [icon]=apiIcon></fa-icon>
+      <fa-icon [icon]=playerIcon [fixedWidth]="true"></fa-icon><span>vs</span><fa-icon [icon]=apiIcon [fixedWidth]="true"></fa-icon>
     </p>
     <p *ngIf="isLoading">Loading...</p>
     <p *ngIf="!isLoading">{{ turnResult }}</p>
