@@ -4,10 +4,13 @@ import de.nloewes.roshambr.model.PlayerChoice;
 import de.nloewes.roshambr.model.MatchResult;
 import de.nloewes.roshambr.model.dao.Match;
 import io.micrometer.core.annotation.Timed;
+import io.micrometer.core.instrument.Counter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 /**
  * Main service class to provide and represent the logic of a game of rock, paper, scissors.
@@ -19,9 +22,16 @@ public class GameService {
 
     private MatchService matchService;
 
+    private Map<PlayerChoice, Counter> cpuChoiceCounters;
+
     @Autowired
     public void setMatchService(MatchService matchService) {
         this.matchService = matchService;
+    }
+
+    @Autowired
+    public void setCpuChoiceCounters(Map<PlayerChoice, Counter> cpuChoiceCounters) {
+        this.cpuChoiceCounters = cpuChoiceCounters;
     }
 
     private static final Logger LOG = LoggerFactory.getLogger(GameService.class);
@@ -92,6 +102,14 @@ public class GameService {
      * @return a random {@link PlayerChoice}
      */
     private PlayerChoice getCpuChoice() {
+        PlayerChoice playerChoice = PlayerChoice.getRandomChoice();
+
+        //find metric counter and increment if possible
+        Counter counter = cpuChoiceCounters.get(playerChoice);
+        if (counter != null) {
+            counter.increment();
+        }
+
         return PlayerChoice.getRandomChoice();
     }
 }

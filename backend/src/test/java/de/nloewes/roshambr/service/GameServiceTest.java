@@ -2,6 +2,7 @@ package de.nloewes.roshambr.service;
 
 import de.nloewes.roshambr.model.PlayerChoice;
 import de.nloewes.roshambr.model.MatchResult;
+import io.micrometer.core.instrument.Counter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,9 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Map;
+
 
 @ExtendWith(MockitoExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -19,6 +23,9 @@ public class GameServiceTest {
 
     @Mock
     private MatchService matchService;
+
+    @Mock
+    private Map<PlayerChoice, Counter> cpuChoiceCounters;
 
     @BeforeAll
     public void init() {
